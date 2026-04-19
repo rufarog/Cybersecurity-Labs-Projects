@@ -41,3 +41,5 @@ Upon succesfully logging in to the website, I was able to see the messages that 
 
 I navigated to the Downloads section of the website to see more documents that were there and I examined more of the HTML and noticed that they were being saved to a path callled http://192.168.56.108/node13/files/ and I navigated to it to see the uploaded files. In order for me to get more information I decided to perform a SQL injection on the search bar at the top to see if I can get more information about the database. I ran 
 http://192.168.56.108/node13/?criteria=%20%27)%20UNION%20SELECT%20table_schema,%20table_name,%20column_name%20from%20information_schema.columns;
+
+Based on the results of this command, I was given information into the different tables in the database and there was mentions of a hackers table with id, password, and uploads. There was also a table sessions that had id, hacker id. 
