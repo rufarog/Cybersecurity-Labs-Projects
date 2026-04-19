@@ -48,6 +48,7 @@ Based on the results of this command, I was given information into the different
 I used this command to querie the hackers table and I was able to see the used id and hashed passwords for all users, however even after using the hash cracker the passwords did not work. http://192.168.56.108/node13/?criteria=%20%27)%20UNION%20SELECT%20null,%20CONCAT(table_schema,%27%20%27,%20table_name),%20column_name%20from%20information_schema.columns; 
 
 I then ran a different command to querie the session table instead and I was able to see the hashed session numbers for all users including user 5 and 8.
+![Hashed Session Keys](./Screenshots/sessionkeyshashed.png)
 
 |Hash | Session|
 |--------|--------|
@@ -62,3 +63,34 @@ I then ran a different command to querie the session table instead and I was abl
 |7946287226fc8b91547c38d913122608| A177
 |4c49c58b56a1a311df7a57896664eb24| A986
 |2f72e4f4112efeb63b9fb0ed1eefd1c9| A250
+
+## Step 4 - Session Hijack 
+I then used a Firefox extension called Cookie Quick Manager to see the cookies on the site and edited the cookie to use the one for user 5 which was A398. 
+![Cookie Manager](./Screenshots/sessionchange.png)
+
+This enabled me to get the Upload section on the website in order to upload files to the server
+![Upload Section](./Screenshots/sessionuploadchange.png)
+
+## Step 5 - File Upload
+The website upload section was accepting only files of type .txt and .pdf. In order for me to try and upload a file that would be able to allow me to perform a revershe shell I had to write a script that would run a command on the server and upload it with these extension types included. Once uploaded I navigated back to the files section of the website and click on the file in order for it to run. The webpage began to load which indicated that it was listening for something.
+![Upload Script](./Screenshots/scriptforlistening.png)
+![Upload Script](./Screenshots/uploadphpscript.png)
+
+## Step 6 - Reverse Shell
+I used netcat on my system to run a command to connect to the website on the specified port on the system. 
+![Connect to server](./Screenshots/connectedtoserver.png)
+
+Once logged in I began to look for the file that was stolen using the find command to see the location of the file. 
+![File Search](./Screenshots/findfile.png)
+
+Navigated to the path and attempted to use cat to simply open the file but I did not have permission to. 
+
+## Step 7 - Privilege Escalation
+I ran a simple whoami and I noticed the user did not have any high permission so I located any files that had SUID permissions in order to use those to potentially open the file 
+![Permissions](./Screenshots/permissions.png)
+
+This showed me all the applications and files with the highest permissions on the server. I began to search if I could use any of these to read a file, and through using GTFO Bins I saw that I could use xxd on the server to perform a file read 
+![GTFO Bins](./Screenshots/gtfobinscommand.png)
+
+Once I found it I used this command to leverage xxd and open the file and I was able to read and retrive the message.
+![Final Message](./Screenshots/finalmessage.png)
