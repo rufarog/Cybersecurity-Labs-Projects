@@ -43,3 +43,4 @@ I navigated to the Downloads section of the website to see more documents that w
 http://192.168.56.108/node13/?criteria=%20%27)%20UNION%20SELECT%20table_schema,%20table_name,%20column_name%20from%20information_schema.columns;
 
 Based on the results of this command, I was given information into the different tables in the database and there was mentions of a hackers table with id, password, and uploads. There was also a table sessions that had id, hacker id. 
+![SQL Tables](./Screenshots/sqltables.png)
